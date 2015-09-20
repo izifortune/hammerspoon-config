@@ -7,7 +7,7 @@ hs.window.animationDuration = 0
 -- hyper d for left one half window
 -----------------------------------------------
 
-hs.hotkey.bind(hyper, 'd', function()
+hs.hotkey.bind({"cmd", "alt"}, 'Left', function()
     if hs.window.focusedWindow() then
         local win = hs.window.focusedWindow()
         local f = win:frame()
@@ -28,7 +28,7 @@ end)
 -- hyper g for right one half window
 -----------------------------------------------
 
-hs.hotkey.bind(hyper, 'g', function()
+hs.hotkey.bind({"cmd", "alt"}, 'Right', function()
     if hs.window.focusedWindow() then
         local win = hs.window.focusedWindow()
         local f = win:frame()
@@ -45,11 +45,45 @@ hs.hotkey.bind(hyper, 'g', function()
     end
 end)
 
+hs.hotkey.bind({"cmd", "alt"}, 'down', function()
+    if hs.window.focusedWindow() then
+        local win = hs.window.focusedWindow()
+        local f = win:frame()
+        local screen = win:screen()
+        local max = screen:frame()
+
+        f.y = max.y + (max.h / 2)
+        f.x = max.x
+        f.h = max.h / 2
+        f.w = max.w
+        win:setFrame(f)
+    else
+        hs.alert.show("No active window")
+    end
+end)
+
+hs.hotkey.bind({"cmd", "alt"}, 'up', function()
+    if hs.window.focusedWindow() then
+        local win = hs.window.focusedWindow()
+        local f = win:frame()
+        local screen = win:screen()
+        local max = screen:frame()
+
+        f.y = max.y
+        f.x = max.x
+        f.h = max.h / 2
+        f.w = max.w
+        win:setFrame(f)
+    else
+        hs.alert.show("No active window")
+    end
+end)
+
 -----------------------------------------------
 -- hyper f for fullscreen
 -----------------------------------------------
 
-hs.hotkey.bind(hyper, 'f', function()
+hs.hotkey.bind({"cmd", "alt"}, 'f', function()
     if hs.window.focusedWindow() then
         local win = hs.window.focusedWindow()
         local f = win:frame()
@@ -70,7 +104,7 @@ end)
 -- hyper r for top left one quarter window
 -----------------------------------------------
 
-hs.hotkey.bind(hyper, 'r', function()
+hs.hotkey.bind({"ctrl", "cmd"}, 'Left', function()
     if hs.window.focusedWindow() then
         local win = hs.window.focusedWindow()
         local f = win:frame()
@@ -91,7 +125,7 @@ end)
 -- hyper t for top right one quarter window
 -----------------------------------------------
 
-hs.hotkey.bind(hyper, 't', function()
+hs.hotkey.bind({"ctrl", "cmd"}, 'Right', function()
     if hs.window.focusedWindow() then
         local win = hs.window.focusedWindow()
         local f = win:frame()
@@ -109,10 +143,10 @@ hs.hotkey.bind(hyper, 't', function()
 end)
 
 -----------------------------------------------
--- hyper v for bottom left one quarter window
+-- hyper v for bottom Right one quarter window
 -----------------------------------------------
 
-hs.hotkey.bind(hyper, 'v', function()
+hs.hotkey.bind({"ctrl", "cmd", "shift"}, 'Right', function()
     if hs.window.focusedWindow() then
         local win = hs.window.focusedWindow()
         local f = win:frame()
@@ -130,10 +164,10 @@ hs.hotkey.bind(hyper, 'v', function()
 end)
 
 -----------------------------------------------
--- hyper c for bottom right one quarter window
+-- hyper c for bottom left one quarter window
 -----------------------------------------------
 
-hs.hotkey.bind(hyper, 'c', function()
+hs.hotkey.bind({"ctrl", "cmd", "shift"}, 'Left', function()
     if hs.window.focusedWindow() then
         local win = hs.window.focusedWindow()
         local f = win:frame()
@@ -148,6 +182,24 @@ hs.hotkey.bind(hyper, 'c', function()
     else
         hs.alert.show("No active window")
     end
+end)
+
+hs.hotkey.bind(hyper, 'Left', function()
+  if hs.window.focusedWindow() then
+      local win = hs.window.focusedWindow()
+      win:moveOneScreenWest()
+  else
+      hs.alert.show("No active window")
+  end
+end)
+
+hs.hotkey.bind(hyper, 'Right', function()
+  if hs.window.focusedWindow() then
+      local win = hs.window.focusedWindow()
+      win:moveOneScreenEast()
+  else
+      hs.alert.show("No active window")
+  end
 end)
 
 -----------------------------------------------
